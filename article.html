@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Article — Le Journal | Les Rubis Noirs</title>
+  <meta name="description" content="Un article du Journal des Rubis Noirs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="journal">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <header class="article-hero wrap" id="head"></header>
+    <div class="wrap"><div class="ph no-figure article-cover" id="cover" data-label="Image de couverture"></div></div>
+
+    <section class="section">
+      <div class="wrap article-layout">
+        <aside id="aside"></aside>
+        <article class="prose">
+          <p class="dropcap lead" id="chapo"></p>
+          <p>Il y a ceux qui savent très tôt. Et il y a tous les autres — la majorité — qui avancent par essais, par rencontres, parfois par hasard. Au fil des épisodes, une évidence s'impose : aucun des parcours racontés dans Les Rubis Noirs n'a été une ligne droite.</p>
+          <h2>Ne pas avoir de modèle n'empêche pas d'en devenir un</h2>
+          <p>Beaucoup de nos invités sont les premiers de leur famille à avoir fait des études supérieures. Ils ont dû apprendre seuls les codes, les sigles, les calendriers d'inscription. Leur conseil revient souvent : chercher activement les personnes qui ont fait le chemin avant soi, et ne pas hésiter à leur écrire.</p>
+          <blockquote>« Un diplôme ne te donne pas une place. Il te donne le droit de la réclamer. »</blockquote>
+          <h2>Trois questions à se poser</h2>
+          <ul>
+            <li>Qu'est-ce qui me donne de l'énergie, même quand c'est difficile ?</li>
+            <li>Qui, autour de moi ou en ligne, fait déjà ce métier — et puis-je lui parler ?</li>
+            <li>Quelle formation me laisse le plus de portes ouvertes ?</li>
+          </ul>
+          <p>Le chemin se construit en marchant. Mais il se construit mieux quand on sait que d'autres l'ont emprunté.</p>
+          <div class="flex-between mt-l" style="border-top:1px solid var(--rule);padding-top:24px">
+            <span class="label muted">Partager cet article</span>
+            <div id="share-bottom"></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section bg-cream">
+      <div class="wrap">
+        <div class="section-head"><div><span class="label label-ruby">À lire aussi</span><h2 class="h2">Dans le <em>Journal</em></h2></div></div>
+        <div class="cards-3" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    (function () {
+      const RN = window.RN, esc = RN.esc;
+      const a = RN.article(new URLSearchParams(location.search).get("id")) || RN.articles[0];
+      document.title = `${a.title} — Le Journal | Les Rubis Noirs`;
+      document.querySelector('meta[name="description"]').content = a.excerpt;
+      document.getElementById("head").innerHTML = `
+        <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> / <a href="journal.html">Le Journal</a> / ${esc(a.category)}</nav>
+        <span class="label label-ruby">${esc(a.category)}</span>
+        <h1 class="display">${esc(a.title)}</h1>
+        <div class="meta label"><span>Par Estelle KEITA</span><span>${RN.formatDate(a.date, RN.lang())}</span><span>${a.read} de lecture</span></div>`;
+      document.getElementById("cover").classList.add(a.tone);
+      document.getElementById("chapo").textContent = a.excerpt;
+      const linked = RN.guests.filter((g) => g.themes.includes(a.category)).slice(0, 3);
+      document.getElementById("aside").innerHTML = `
+        <div class="aside-block"><span class="label">Épisodes liés</span><ul>${(linked.length ? linked : RN.guests.slice(0, 3)).map((g) => `<li><a href="invite.html?id=${g.id}">${esc(g.name)} — <span class="muted">${esc(g.role)}</span></a></li>`).join("")}</ul></div>
+        <div class="aside-block"><span class="label">Partager</span>${RN.shareHTML()}</div>`;
+      document.getElementById("share-bottom").innerHTML = RN.shareHTML();
+      document.getElementById("related").innerHTML = RN.articles.filter((x) => x.id !== a.id).slice(0, 3).map(RN.articleCard).join("");
+      RN.observeReveal();
+    })();
+  </script>
+</body>
+</html>

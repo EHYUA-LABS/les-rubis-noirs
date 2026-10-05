@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presse & partenariats — Les Rubis Noirs</title>
+  <meta name="description" content="Espace presse des Rubis Noirs : présentation, biographie d'Estelle KEITA, kit média, photos officielles et contacts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="presse">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <header class="page-hero dark">
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> / Presse & partenariats</nav>
+        <span class="label label-ruby">Espace presse</span>
+        <h1 class="display">Presse & <em>partenariats</em></h1>
+        <p class="lead">Tout ce qu'il faut pour parler des Rubis Noirs : présentation, visuels officiels, kit média et contacts dédiés.</p>
+        <a class="btn btn-cream mt-m" href="#"><span data-icon="download"></span> Télécharger le kit média (PDF)</a>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="wrap split top">
+        <div>
+          <span class="label label-ruby">En synthèse</span>
+          <h2 class="h2 mt-s">Les Rubis Noirs en <em>quelques lignes</em></h2>
+        </div>
+        <div class="prose">
+          <p><strong>Les Rubis Noirs</strong> est un podcast et média éditorial créé par Estelle KEITA. Il valorise les parcours de personnes noires issues des catégories socioprofessionnelles supérieures — cadres, entrepreneurs, intellectuels — et transmet aux jeunes des pistes de réflexion, des conseils et des exemples de trajectoires.</p>
+          <p><strong>Estelle KEITA</strong> — [biographie courte à fournir par la cliente, environ 80 mots, utilisable telle quelle par les médias].</p>
+          <p><strong>Ligne éditoriale</strong> — des conversations longues, élégantes et sincères ; un Journal qui prolonge les épisodes ; une ambition francophone et internationale.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-sm bg-cream">
+      <div class="wrap">
+        <div class="section-head"><div><span class="label label-ruby">Médiathèque</span><h2 class="h2">Photos & <em>logos</em></h2></div></div>
+        <div class="assets">
+          <figure><div class="ph tone-ruby" data-label="Estelle — HD"></div><figcaption>Portrait officiel <a href="#">JPG</a></figcaption></figure>
+          <figure><div class="ph tone-brown" data-label="Estelle — studio"></div><figcaption>En studio <a href="#">JPG</a></figcaption></figure>
+          <figure><div class="logo-tile bg-ink" style="color:var(--cream)" data-logo></div><figcaption>Logo — fond sombre <a href="#">SVG</a></figcaption></figure>
+          <figure><div class="logo-tile" style="background:var(--ivory);border:1px solid var(--rule);color:var(--ruby)" data-logo></div><figcaption>Logo — fond clair <a href="#">SVG</a></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head"><div><span class="label label-ruby">Audience</span><h2 class="h2">Chiffres <em>clés</em></h2></div><p class="muted" style="max-width:34ch">Emplacement prévu pour les statistiques d'audience, à ajouter ultérieurement.</p></div>
+        <div class="stats-ph">
+          <div><div class="v">— —</div><span class="label muted">Écoutes cumulées</span></div>
+          <div><div class="v">— —</div><span class="label muted">Abonnés newsletter</span></div>
+          <div><div class="v">— —</div><span class="label muted">Pays d'écoute</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="wrap contact-cards">
+        <div>
+          <span class="label label-ruby">Contact presse</span>
+          <p class="mt-s"><a class="mail" href="mailto:presse@lesrubisnoirs.com">presse@lesrubisnoirs.com</a></p>
+          <p class="muted mt-s">Interviews, demandes d'informations, accréditations.</p>
+        </div>
+        <div>
+          <span class="label label-ruby">Partenariats & collaborations</span>
+          <p class="mt-s"><a class="mail" href="mailto:partenariats@lesrubisnoirs.com">partenariats@lesrubisnoirs.com</a></p>
+          <p class="muted mt-s">Marques, institutions, écoles, événements.</p>
+        </div>
+      </div>
+      <div class="wrap center mt-l"><a class="btn btn-ink" href="contact.html?type=partenariat">Formulaire de contact <span class="ar" aria-hidden="true">→</span></a></div>
+    </section>
+    <div class="section-sm"></div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.querySelectorAll("[data-logo]").forEach((el) => {
+      el.innerHTML = RN.icons.gem.replace('class="brand-mark"', "");
+    });
+  </script>
+</body>
+</html>

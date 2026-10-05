@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Les Rubis — Portraits des invités | Les Rubis Noirs</title>
+  <meta name="description" content="La bibliothèque des portraits des Rubis Noirs : avocates, ingénieurs, chirurgiennes, entrepreneurs, diplomates… Découvrez leurs parcours.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="rubis">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <header class="page-hero dark">
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> / Les Rubis</nav>
+        <span class="label label-ruby">La bibliothèque des portraits</span>
+        <h1 class="display">Ils sont <em>Rubis</em></h1>
+        <p class="lead">Huit secteurs, huit trajectoires — et bien d'autres à venir. Chaque portrait raconte ce qui se cache derrière une fonction : un chemin, des choix, des personnes.</p>
+      </div>
+    </header>
+
+    <section class="wrap">
+      <div class="toolbar" style="border-bottom:0">
+        <div class="filter-group">
+          <span class="label">Secteur</span>
+          <div class="chips" id="f-sector" role="group" aria-label="Filtrer par secteur"></div>
+        </div>
+      </div>
+      <div class="mosaic" id="grid"></div>
+    </section>
+
+    <section class="section">
+      <div class="wrap center">
+        <div class="orn"><span>✦</span></div>
+        <h2 class="h2 mt-m" style="max-width:20ch;margin-left:auto;margin-right:auto">Vous connaissez un parcours qui mérite d'être <em>raconté</em> ?</h2>
+        <a class="btn btn-ruby mt-m" href="participer.html">Proposer un invité <span class="ar" aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    (function () {
+      const RN = window.RN;
+      let sector = null;
+      const chips = document.getElementById("f-sector");
+      const grid = document.getElementById("grid");
+      function render() {
+        const c = (v, on) => `<button type="button" class="chip" data-v="${v}" aria-pressed="${on}">${v}</button>`;
+        chips.innerHTML = c("Tous", !sector) + RN.sectors.map((s) => c(s, s === sector)).join("");
+        grid.innerHTML = RN.guests.filter((g) => !sector || g.sector === sector).map(RN.mosaicTile).join("");
+        RN.observeReveal(grid);
+      }
+      chips.addEventListener("click", (e) => {
+        const b = e.target.closest(".chip"); if (!b) return;
+        sector = b.dataset.v === "Tous" ? null : b.dataset.v; render();
+      });
+      render();
+    })();
+  </script>
+</body>
+</html>

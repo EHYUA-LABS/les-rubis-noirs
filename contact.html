@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Les Rubis Noirs</title>
+  <meta name="description" content="Contactez Les Rubis Noirs : demande générale, interview d'Estelle KEITA, presse ou partenariat.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="contact">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <section class="section">
+      <div class="wrap split top">
+        <div>
+          <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> / Contact</nav>
+          <span class="label label-ruby">Contact</span>
+          <h1 class="display mt-s" style="font-size:clamp(46px,7vw,100px)">Écrivons-<em>nous</em>.</h1>
+          <p class="lead mt-m">Une question, une demande d'interview, une idée de collaboration ? Nous répondons sous 5 jours ouvrés.</p>
+          <div class="stack mt-l">
+            <div><span class="label muted">Email général</span><p class="h3">bonjour@lesrubisnoirs.com</p></div>
+            <div><span class="label muted">Presse & partenariats</span><p><a class="link-arrow" href="presse.html">Espace presse →</a></p></div>
+            <div><span class="label muted">Proposer un invité</span><p><a class="link-arrow" href="participer.html">Formulaire dédié →</a></p></div>
+          </div>
+        </div>
+        <div>
+          <form class="form" data-validate data-done="done">
+            <div class="field full">
+              <label for="type">Objet de la demande <span class="req">*</span></label>
+              <select id="type" required>
+                <option value="">Choisir…</option>
+                <option value="general">Demande générale</option>
+                <option value="interview">Demande d'interview d'Estelle</option>
+                <option value="presse">Presse</option>
+                <option value="partenariat">Partenariat / collaboration</option>
+              </select>
+              <span class="err">Merci de choisir un objet.</span>
+            </div>
+            <div class="field">
+              <label for="cname">Nom <span class="req">*</span></label>
+              <input id="cname" type="text" required autocomplete="name">
+              <span class="err">Ce champ est requis.</span>
+            </div>
+            <div class="field">
+              <label for="org">Organisation / média</label>
+              <input id="org" type="text" autocomplete="organization">
+            </div>
+            <div class="field full">
+              <label for="cemail">Email <span class="req">*</span></label>
+              <input id="cemail" type="email" required autocomplete="email">
+              <span class="err">Merci d'indiquer une adresse email valide.</span>
+            </div>
+            <div class="field full">
+              <label for="msg">Message <span class="req">*</span></label>
+              <textarea id="msg" required></textarea>
+              <span class="err">Ce champ est requis.</span>
+            </div>
+            <div class="hp" aria-hidden="true"><label>Ne pas remplir <input type="text" tabindex="-1" autocomplete="off"></label></div>
+            <div class="field full">
+              <label class="consent" style="text-transform:none;letter-spacing:0;font-weight:400"><input type="checkbox" required> <span>J'accepte que mes données soient utilisées pour traiter ma demande. <a href="#" style="text-decoration:underline">Politique de confidentialité</a>.</span></label>
+              <span class="err">Votre consentement est nécessaire.</span>
+            </div>
+            <div class="full"><button class="btn btn-ink" type="submit">Envoyer <span class="ar" aria-hidden="true">→</span></button></div>
+          </form>
+          <div class="form-done" id="done" role="status">
+            <div class="orn"><span>✦</span></div>
+            <p class="display">Message <em>envoyé</em>.</p>
+            <p class="muted">Merci ! Nous revenons vers vous très vite.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Préselection de l'objet via ?type=interview
+    const t = new URLSearchParams(location.search).get("type");
+    if (t) { const s = document.getElementById("type"); if ([...s.options].some((o) => o.value === t)) s.value = t; }
+  </script>
+</body>
+</html>

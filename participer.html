@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Participer — Proposer un invité | Les Rubis Noirs</title>
+  <meta name="description" content="Recommandez une personne dont le parcours mérite d'être raconté dans Les Rubis Noirs, ou proposez votre candidature.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="participer">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> / Participer</nav>
+        <span class="label label-ruby">Participer</span>
+        <h1 class="display">Proposer un <em>Rubis</em></h1>
+        <p class="lead">Vous connaissez un parcours inspirant — ou c'est le vôtre ? Les Rubis Noirs se construit aussi grâce à sa communauté.</p>
+      </div>
+    </header>
+
+    <!-- Conditions -->
+    <section class="section bg-ink">
+      <div class="wrap split top">
+        <div>
+          <span class="label label-ruby">Avant de proposer</span>
+          <h2 class="h2 mt-s">Les conditions pour être <em>interviewé·e</em></h2>
+          <p class="lead mt-m">Ces critères guident la sélection éditoriale. Chaque proposition est lue avec attention ; nous revenons vers les profils retenus.</p>
+        </div>
+        <ol class="conditions">
+          <li><div><strong>Être une personne noire</strong><span>Le podcast valorise les parcours de personnes noires, en France et à l'international.</span></div></li>
+          <li><div><strong>Occuper une fonction de cadre, d'entrepreneur ou d'intellectuel</strong><span>Cadres, dirigeants, professions libérales, chercheurs, entrepreneurs, hauts fonctionnaires…</span></div></li>
+          <li><div><strong>Avoir un parcours à transmettre</strong><span>Études, choix, obstacles, réussites : une histoire qui peut éclairer les plus jeunes.</span></div></li>
+          <li><div><strong>Accepter un entretien d'environ une heure</strong><span>En studio à Paris ou à distance, ainsi qu'une séance photo pour le portrait.</span></div></li>
+          <li><div><strong>Consentir à la diffusion</strong><span>Épisode, portrait et extraits publiés sur le site et les plateformes d'écoute.</span></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Formulaire -->
+    <section class="section">
+      <div class="wrap-narrow">
+        <span class="label label-ruby">Formulaire</span>
+        <h2 class="h2 mt-s">Votre <em>recommandation</em></h2>
+
+        <form class="form mt-l" data-validate data-done="done" aria-describedby="req-note">
+          <p id="req-note" class="full muted" style="font-size:14px">Les champs marqués <span style="color:var(--ruby)">*</span> sont obligatoires.</p>
+          <div class="field full">
+            <label for="who">Vous proposez <span class="req">*</span></label>
+            <select id="who" required>
+              <option value="">Choisir…</option>
+              <option>Une autre personne</option>
+              <option>Ma propre candidature</option>
+            </select>
+            <span class="err">Merci de préciser.</span>
+          </div>
+          <div class="field">
+            <label for="name">Nom et prénom de la personne <span class="req">*</span></label>
+            <input id="name" type="text" required autocomplete="off">
+            <span class="err">Ce champ est requis.</span>
+          </div>
+          <div class="field">
+            <label for="job">Métier / fonction <span class="req">*</span></label>
+            <input id="job" type="text" required>
+            <span class="err">Ce champ est requis.</span>
+          </div>
+          <div class="field">
+            <label for="place">Pays / ville <span class="req">*</span></label>
+            <input id="place" type="text" required>
+            <span class="err">Ce champ est requis.</span>
+          </div>
+          <div class="field">
+            <label for="link">Lien LinkedIn ou site professionnel</label>
+            <input id="link" type="url" placeholder="https://">
+            <span class="err">Merci d'indiquer une URL valide (https://…).</span>
+          </div>
+          <div class="field full">
+            <label for="why">Pourquoi cette personne devrait-elle être invitée ? <span class="req">*</span></label>
+            <textarea id="why" required placeholder="Son parcours, ce qu'il ou elle pourrait transmettre…"></textarea>
+            <span class="err">Quelques lignes nous aideront beaucoup.</span>
+          </div>
+          <div class="field full">
+            <label for="email">Votre email <span class="req">*</span></label>
+            <input id="email" type="email" required autocomplete="email">
+            <span class="err">Merci d'indiquer une adresse email valide.</span>
+          </div>
+          <div class="hp" aria-hidden="true"><label>Ne pas remplir <input type="text" tabindex="-1" autocomplete="off"></label></div>
+          <div class="field full">
+            <label class="consent" style="text-transform:none;letter-spacing:0;font-weight:400"><input type="checkbox" required> <span>J'accepte que les informations saisies soient utilisées par Les Rubis Noirs pour étudier cette proposition. Elles ne seront jamais transmises à des tiers. <a href="#" style="text-decoration:underline">Politique de confidentialité</a>.</span></label>
+            <span class="err">Votre consentement est nécessaire pour envoyer la proposition.</span>
+          </div>
+          <div class="full"><button class="btn btn-ruby" type="submit">Envoyer la proposition <span class="ar" aria-hidden="true">→</span></button></div>
+        </form>
+
+        <div class="form-done mt-l" id="done" role="status">
+          <div class="orn"><span>✦</span></div>
+          <p class="display">Merci pour votre <em>proposition</em>.</p>
+          <p class="muted">Estelle et l'équipe la liront avec attention. Un email de confirmation vous a été envoyé.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

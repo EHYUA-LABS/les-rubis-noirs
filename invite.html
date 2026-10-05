@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portrait — Les Rubis Noirs</title>
+  <meta name="description" content="Portrait et épisode du podcast Les Rubis Noirs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="rubis">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <!-- Hero portrait -->
+    <section class="portrait-hero" id="hero"></section>
+
+    <!-- Écoute -->
+    <section class="section-sm bg-cream">
+      <div class="wrap">
+        <div class="player" id="player"></div>
+      </div>
+    </section>
+
+    <!-- Contenu éditorial -->
+    <section class="section">
+      <div class="wrap article-layout">
+        <aside id="aside"></aside>
+        <article class="prose" id="prose"></article>
+      </div>
+    </section>
+
+    <!-- Citation -->
+    <section class="section bg-wine">
+      <div class="wrap quote-block">
+        <span class="mark" aria-hidden="true">“</span>
+        <blockquote id="quote" class="reveal"></blockquote>
+        <span class="label" id="quote-sig" style="color:var(--sand)"></span>
+      </div>
+    </section>
+
+    <!-- Articles liés -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="label label-ruby">Pour aller plus loin</span><h2 class="h2">Dans le <em>Journal</em></h2></div>
+        </div>
+        <div class="cards-3" id="related-articles"></div>
+      </div>
+    </section>
+
+    <!-- Portraits similaires -->
+    <section class="section bg-cream">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="label label-ruby">Portraits similaires</span><h2 class="h2">D'autres <em>Rubis</em></h2></div>
+          <a class="link-arrow" href="rubis.html">Tous les portraits <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="mosaic" id="similar" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    (function () {
+      const RN = window.RN, esc = RN.esc, I = RN.icons;
+      const id = new URLSearchParams(location.search).get("id");
+      const g = RN.guest(id) || RN.guests[0];
+      const ep = g.episode;
+
+      document.title = `${g.name}, ${g.role} — Les Rubis Noirs`;
+      document.querySelector('meta[name="description"]').content = `${g.name}, ${g.role} : ${ep.summary}`;
+
+      // Données structurées (épisode)
+      const ld = document.createElement("script");
+      ld.type = "application/ld+json";
+      ld.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "PodcastEpisode", name: ep.title, episodeNumber: ep.n, datePublished: ep.date,
+        partOfSeries: { "@type": "PodcastSeries", name: "Les Rubis Noirs" }, description: ep.summary });
+      document.head.appendChild(ld);
+
+      document.getElementById("hero").innerHTML = `
+        <div class="ph ${g.tone}" role="img" aria-label="Portrait de ${esc(g.name)}" data-label="Portrait éditorial — ${esc(g.name)}"></div>
+        <div class="info">
+          <nav class="breadcrumb" aria-label="Fil d'Ariane" style="color:rgba(245,236,224,.6)"><a href="index.html">Accueil</a> / <a href="rubis.html">Les Rubis</a> / ${esc(g.name)}</nav>
+          <span class="label" style="color:var(--sand)">Épisode ${String(ep.n).padStart(2, "0")} · ${RN.formatDate(ep.date, RN.lang())}</span>
+          <h1 class="display">${esc(g.name)}</h1>
+          <p class="role">${esc(g.role)}</p>
+          <div class="facts">
+            <div><span class="label">Secteur</span><span>${esc(g.sector)}</span></div>
+            <div><span class="label">Basé·e à</span><span>${esc(g.city)}</span></div>
+            <div><span class="label">Durée</span><span>${ep.duration}</span></div>
+          </div>
+          <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:8px">
+            ${RN.platformsHTML(ep.title)}
+            ${RN.shareHTML().replace('class="share"', 'class="share" style="--rule:rgba(245,236,224,.3)"')}
+          </div>
+        </div>`;
+
+      // Lecteur (simulé — en production : embed Spotify / YouTube)
+      let playing = false, pos = 0, timer;
+      const total = parseInt(ep.duration, 10) * 60;
+      const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+      const player = document.getElementById("player");
+      player.innerHTML = `
+        <button class="play" type="button" aria-label="Lire l'épisode">${I.play}</button>
+        <div>
+          <div class="label muted">Écouter l'épisode ${ep.n}</div>
+          <div class="ptitle">${esc(ep.title)}</div>
+          <div class="bar" role="slider" aria-label="Progression" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="0" tabindex="0"><i></i></div>
+          <div class="times"><span class="cur">0:00</span><span>${fmt(total)}</span></div>
+        </div>
+        <div class="player-side on-light">${RN.platformsHTML(ep.title)}</div>`;
+      const btn = player.querySelector(".play"), bar = player.querySelector(".bar"), fill = bar.querySelector("i"), cur = player.querySelector(".cur");
+      const draw = () => { fill.style.width = (pos / total) * 100 + "%"; cur.textContent = fmt(pos); bar.setAttribute("aria-valuenow", Math.floor(pos)); };
+      btn.addEventListener("click", () => {
+        playing = !playing;
+        btn.innerHTML = playing ? I.pause : I.play;
+        btn.setAttribute("aria-label", playing ? "Mettre en pause" : "Lire l'épisode");
+        clearInterval(timer);
+        if (playing) timer = setInterval(() => { pos = Math.min(total, pos + 12); draw(); }, 250);
+      });
+      bar.addEventListener("click", (e) => { const r = bar.getBoundingClientRect(); pos = ((e.clientX - r.left) / r.width) * total; draw(); });
+      bar.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") { pos = Math.min(total, pos + 15); draw(); }
+        if (e.key === "ArrowLeft") { pos = Math.max(0, pos - 15); draw(); }
+      });
+
+      // Colonne latérale
+      document.getElementById("aside").innerHTML = `
+        <div class="aside-block"><span class="label">Thématiques</span><div class="chips">${g.themes.map((t) => `<a class="chip" href="episodes.html?theme=${encodeURIComponent(t)}">${esc(t)}</a>`).join("")}</div></div>
+        <div class="aside-block"><span class="label">Études & formation</span><ul>${g.studies.map((s) => `<li>${esc(s)}</li>`).join("")}</ul></div>
+        <div class="aside-block"><span class="label">Retrouver ${esc(g.name.split(" ").slice(-2).join(" "))}</span>
+          <div class="share"><a href="#" aria-label="LinkedIn">${I.linkedin}</a><a href="#" aria-label="Instagram">${I.instagram}</a><a href="#" aria-label="Site professionnel">${I.link}</a></div></div>
+        <div class="aside-block"><span class="label">Partager</span>${RN.shareHTML()}</div>`;
+
+      // Corps éditorial
+      document.getElementById("prose").innerHTML = `
+        <p class="dropcap">${esc(g.bio)}</p>
+        <h2>Le parcours</h2>
+        <p>${esc(g.parcours)}</p>
+        <p>Dans cet épisode, Estelle revient avec ${esc(g.name.split(" ")[g.name.startsWith("Dr") ? 1 : 0])} sur les moments charnières de sa trajectoire : les choix d'orientation, les rencontres déterminantes, les doutes — et les conseils à transmettre aujourd'hui à quelqu'un qui a 18 ans.</p>
+        <blockquote>« ${esc(g.quote)} »</blockquote>
+        <h2>Chronologie</h2>
+        <ol class="timeline">${g.timeline.map((t) => `<li><span class="year">${t.year}</span><div><strong>${esc(t.title)}</strong>${esc(t.text)}</div></li>`).join("")}</ol>
+        <h2>Ce qu'on retient</h2>
+        <ul>
+          <li>L'importance d'un mentor — souvent rencontré par hasard.</li>
+          <li>Les études comme levier, mais pas comme seule voie.</li>
+          <li>Oser demander : un poste, un conseil, une seconde chance.</li>
+        </ul>
+        <div class="transcript mt-l">
+          <div><span class="label label-ruby">Transcription</span><p style="margin:6px 0 0">La transcription intégrale de l'épisode sera bientôt disponible.</p></div>
+          <button class="btn btn-line btn-sm" type="button" disabled>Bientôt</button>
+        </div>`;
+
+      document.getElementById("quote").innerHTML = esc(g.quote);
+      document.getElementById("quote-sig").textContent = `${g.name} — ${g.role}`;
+
+      // Articles liés : ceux qui partagent une thématique ou citent l'invité
+      const rel = RN.articles.filter((a) => g.themes.includes(a.category) || a.title.includes(g.name.split(" ")[0]));
+      const others = RN.articles.filter((a) => !rel.includes(a));
+      document.getElementById("related-articles").innerHTML = rel.concat(others).slice(0, 3).map(RN.articleCard).join("");
+
+      // Portraits similaires : thématiques en commun
+      const sim = RN.guests.filter((x) => x.id !== g.id)
+        .map((x) => ({ x, s: x.themes.filter((t) => g.themes.includes(t)).length + (x.sector === g.sector ? 2 : 0) }))
+        .sort((a, b) => b.s - a.s).slice(0, 4).map((o) => o.x);
+      document.getElementById("similar").innerHTML = sim.map(RN.mosaicTile).join("");
+
+      RN.observeReveal();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Soutenir Les Rubis Noirs — Faire un don</title>
+  <meta name="description" content="Soutenez Les Rubis Noirs, média indépendant : votre don finance la production des épisodes, les rencontres avec les invités et le développement du média.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="soutenir">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <!-- Introduction -->
+    <header class="page-hero">
+      <div class="wrap split">
+        <div>
+          <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> / Soutenir</nav>
+          <span class="label label-ruby">Soutenir Les Rubis Noirs</span>
+          <h1 class="display" style="font-size:clamp(46px,7vw,104px)">Faites vivre <em>ces histoires</em>.</h1>
+        </div>
+        <div>
+          <p class="lead">Les Rubis Noirs est un média indépendant. Chaque épisode demande des heures de préparation, de rencontres, d'enregistrement et de montage. Vos contributions nous permettent de continuer à produire et à diffuser ces parcours — gratuitement, pour toutes et tous.</p>
+          <a class="btn btn-ruby mt-m" href="#don">Choisir ma contribution <span class="ar" aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+    </header>
+
+    <!-- À quoi sert votre don -->
+    <section class="section bg-wine" id="usage">
+      <div class="wrap">
+        <div class="section-head"><div><span class="label label-ruby">Transparence</span><h2 class="h2">À quoi sert <em>votre don</em> ?</h2></div></div>
+        <div class="uses">
+          <div class="reveal"><span class="n">01</span><h3>Production des épisodes</h3><p>Studio, matériel, montage et mixage de chaque conversation.</p></div>
+          <div class="reveal reveal-d1"><span class="n">02</span><h3>Rencontres & déplacements</h3><p>Aller à la rencontre des invités, en France et à l'international.</p></div>
+          <div class="reveal reveal-d2"><span class="n">03</span><h3>Photo, vidéo & éditorial</h3><p>Portraits photographiques, extraits vidéo et articles du Journal.</p></div>
+          <div class="reveal reveal-d3"><span class="n">04</span><h3>Développement du média</h3><p>Version anglaise, transcriptions, nouveaux formats.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Choisissez votre contribution -->
+    <section class="section" id="don">
+      <div class="wrap donate">
+        <div>
+          <span class="label label-ruby">Choisissez votre contribution</span>
+          <h2 class="h2 mt-s" style="margin-bottom:32px">Chaque geste <em>compte</em>.</h2>
+          <div class="freq" role="group" aria-label="Fréquence du don">
+            <button type="button" data-freq="once" aria-pressed="true">Don ponctuel</button>
+            <button type="button" data-freq="monthly" aria-pressed="false">Mensuel</button>
+          </div>
+          <div class="tiers" id="tiers" role="group" aria-label="Montant du don"></div>
+          <p class="notice">Paliers indicatifs, à valider avec la cliente. Le cadre juridique du don, le bénéficiaire des fonds et la solution de paiement (Stripe, HelloAsso, PayPal…) seront validés avant la mise en production. Aucune donnée bancaire n'est stockée sur le site : le paiement s'effectue sur une page hébergée et sécurisée du prestataire.</p>
+        </div>
+        <aside class="summary-card" aria-live="polite">
+          <span class="label" style="color:var(--sand)">Votre contribution</span>
+          <div class="total" id="total">25 €</div>
+          <div class="muted" id="freq-label" style="color:rgba(245,236,224,.6)">Don ponctuel</div>
+          <div class="mt-m">
+            <div class="row"><span>Bénéficiaire</span><span>Les Rubis Noirs</span></div>
+            <div class="row"><span>Paiement</span><span>Carte · Apple Pay · Google Pay</span></div>
+          </div>
+          <button class="btn btn-cream btn-block mt-m" type="button" id="pay">Faire un don <span class="ar" aria-hidden="true">→</span></button>
+          <p class="secure"><span data-icon="lock"></span> Paiement 100 % sécurisé via notre prestataire. Reçu envoyé par email.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Remerciement -->
+    <section class="section bg-cream">
+      <div class="wrap quote-block">
+        <div class="orn"><span>✦</span></div>
+        <blockquote style="color:var(--ink)">Grâce à vous, une jeune personne entendra demain le parcours qui <em style="color:var(--ruby)">changera le sien</em>.</blockquote>
+        <span class="label label-ruby">Merci — Estelle & l'équipe des Rubis Noirs</span>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <!-- Confirmation (simulation du retour du prestataire de paiement) -->
+  <div class="modal" id="thanks" role="dialog" aria-modal="true" aria-labelledby="thanks-title" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-box small">
+      <button class="modal-close" type="button" data-close-modal aria-label="Fermer">×</button>
+      <div class="modal-content" style="align-items:center">
+        <div class="orn"><span>✦</span></div>
+        <h2 class="display" id="thanks-title">Merci pour votre <em>soutien</em></h2>
+        <p class="lead" id="thanks-text"></p>
+        <p class="muted" style="font-size:14px">Maquette : en production, le visiteur est redirigé vers la page de paiement sécurisée du prestataire, puis revient sur cette confirmation. Un email de confirmation est envoyé lorsque le prestataire le permet.</p>
+        <button class="btn btn-ink" type="button" data-close-modal>Retour au site</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    (function () {
+      const RN = window.RN;
+      const tiers = [
+        { v: 5, d: "Un café pour l'équipe" },
+        { v: 10, d: "Une heure de montage" },
+        { v: 25, d: "Un portrait photo" },
+        { v: 50, d: "Un déplacement chez un invité" },
+        { v: 100, d: "Une journée de studio" }
+      ];
+      const state = { amount: 25, freq: "once", free: false };
+      const box = document.getElementById("tiers");
+      box.innerHTML = tiers.map((t) =>
+        `<button type="button" class="tier" data-v="${t.v}" aria-pressed="${t.v === state.amount}"><span class="amt">${t.v} €</span><span class="desc">${t.d}</span></button>`
+      ).join("") + `
+        <div class="tier free" data-free aria-pressed="false" role="group" aria-label="Montant libre">
+          <span class="desc">Montant libre</span>
+          <label class="free-input"><span class="sr-only">Montant libre en euros</span><input id="free" type="number" inputmode="decimal" min="1" max="10000" step="1" placeholder="—"><span class="amt" style="font-size:28px">€</span></label>
+        </div>`;
+
+      const free = document.getElementById("free");
+      const freeTile = box.querySelector("[data-free]");
+      function update() {
+        box.querySelectorAll(".tier[data-v]").forEach((b) => b.setAttribute("aria-pressed", String(!state.free && +b.dataset.v === state.amount)));
+        freeTile.setAttribute("aria-pressed", String(state.free));
+        const ok = state.amount >= 1;
+        document.getElementById("total").textContent = ok ? `${state.amount.toLocaleString("fr-FR")} €` : "— €";
+        document.getElementById("freq-label").textContent = state.freq === "monthly" ? "Chaque mois · résiliable à tout moment" : "Don ponctuel";
+        document.getElementById("pay").disabled = !ok;
+      }
+      box.addEventListener("click", (e) => {
+        const b = e.target.closest(".tier[data-v]");
+        if (b) { state.amount = +b.dataset.v; state.free = false; free.value = ""; update(); }
+        else if (e.target.closest("[data-free]")) { state.free = true; state.amount = +free.value || 0; free.focus(); update(); }
+      });
+      free.addEventListener("input", () => { state.free = true; state.amount = Math.max(0, Math.round(+free.value || 0)); update(); });
+      document.querySelectorAll("[data-freq]").forEach((b) => b.addEventListener("click", () => {
+        state.freq = b.dataset.freq;
+        document.querySelectorAll("[data-freq]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+        update();
+      }));
+      document.getElementById("pay").addEventListener("click", () => {
+        document.getElementById("thanks-text").textContent =
+          `Votre ${state.freq === "monthly" ? "don mensuel" : "don"} de ${state.amount.toLocaleString("fr-FR")} € contribue directement à la continuité des Rubis Noirs.`;
+        RN.openModal("thanks");
+      });
+      update();
+    })();
+  </script>
+</body>
+</html>

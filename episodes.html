@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Épisodes — Les Rubis Noirs</title>
+  <meta name="description" content="Tous les épisodes du podcast Les Rubis Noirs : recherchez par invité, métier ou thématique et écoutez sur Spotify, YouTube ou Deezer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="episodes">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> / Épisodes</nav>
+        <span class="label label-ruby">Le podcast</span>
+        <h1 class="display">Tous les <em>épisodes</em></h1>
+        <p class="lead">Une conversation longue, sincère, sans détour. Chaque épisode retrace un parcours — des bancs de l'école aux fonctions occupées aujourd'hui.</p>
+        <div class="mt-m" style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="platform-pill" href="#"><span data-icon="spotify"></span> Spotify</a>
+          <a class="platform-pill" href="#"><span data-icon="youtube"></span> YouTube</a>
+          <a class="platform-pill" href="#"><span data-icon="deezer"></span> Deezer</a>
+          <a class="platform-pill" href="#"><span data-icon="apple"></span> Apple Podcasts</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="wrap">
+      <div class="toolbar">
+        <label class="search">
+          <span class="sr-only">Rechercher un épisode</span>
+          <span data-icon="search"></span>
+          <input type="search" id="q" placeholder="Rechercher un invité, un métier, un mot-clé…" autocomplete="off">
+        </label>
+        <div class="filter-group">
+          <span class="label">Secteur</span>
+          <div class="chips" id="f-sector" role="group" aria-label="Filtrer par secteur"></div>
+        </div>
+        <div class="filter-group">
+          <span class="label">Thématique</span>
+          <div class="chips" id="f-theme" role="group" aria-label="Filtrer par thématique"></div>
+        </div>
+      </div>
+
+      <div class="results-bar">
+        <p id="count" class="label muted" aria-live="polite"></p>
+        <label class="sort">Trier :
+          <select id="sort">
+            <option value="desc">Plus récents</option>
+            <option value="asc">Plus anciens</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="ep-list" id="list"></div>
+      <div class="empty" id="empty">
+        <p class="h3">Aucun épisode ne correspond.</p>
+        <button class="btn btn-line mt-m" type="button" id="reset">Réinitialiser les filtres</button>
+      </div>
+    </section>
+
+    <section class="section-sm"></section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    (function () {
+      const RN = window.RN;
+      const state = { q: "", sector: null, theme: null, sort: "desc" };
+      const params = new URLSearchParams(location.search);
+      if (params.get("theme")) state.theme = params.get("theme");
+      if (params.get("secteur")) state.sector = params.get("secteur");
+
+      const chip = (v, active) => `<button type="button" class="chip" data-v="${v}" aria-pressed="${active}">${v}</button>`;
+      function renderChips() {
+        document.getElementById("f-sector").innerHTML = chip("Tous", !state.sector) + RN.sectors.map((s) => chip(s, state.sector === s)).join("");
+        document.getElementById("f-theme").innerHTML = chip("Toutes", !state.theme) + RN.themes.map((t) => chip(t, state.theme === t)).join("");
+      }
+
+      const norm = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+
+      function render() {
+        const q = norm(state.q.trim());
+        let items = RN.guests.filter((g) => {
+          if (state.sector && g.sector !== state.sector) return false;
+          if (state.theme && !g.themes.includes(state.theme)) return false;
+          if (!q) return true;
+          const hay = norm([g.name, g.role, g.sector, g.city, g.episode.title, g.episode.summary, g.themes.join(" ")].join(" "));
+          return q.split(/\s+/).every((w) => hay.includes(w));
+        });
+        items.sort((a, b) => (state.sort === "desc" ? b.episode.n - a.episode.n : a.episode.n - b.episode.n));
+        document.getElementById("list").innerHTML = items.map(RN.episodeRow).join("");
+        document.getElementById("count").textContent = `${items.length} épisode${items.length > 1 ? "s" : ""}`;
+        document.getElementById("empty").classList.toggle("show", items.length === 0);
+        RN.observeReveal(document.getElementById("list"));
+      }
+
+      document.getElementById("f-sector").addEventListener("click", (e) => {
+        const b = e.target.closest(".chip"); if (!b) return;
+        state.sector = b.dataset.v === "Tous" ? null : b.dataset.v; renderChips(); render();
+      });
+      document.getElementById("f-theme").addEventListener("click", (e) => {
+        const b = e.target.closest(".chip"); if (!b) return;
+        state.theme = b.dataset.v === "Toutes" ? null : b.dataset.v; renderChips(); render();
+      });
+      let t;
+      document.getElementById("q").addEventListener("input", (e) => { clearTimeout(t); t = setTimeout(() => { state.q = e.target.value; render(); }, 120); });
+      document.getElementById("sort").addEventListener("change", (e) => { state.sort = e.target.value; render(); });
+      document.getElementById("reset").addEventListener("click", () => {
+        Object.assign(state, { q: "", sector: null, theme: null }); document.getElementById("q").value = ""; renderChips(); render();
+      });
+
+      renderChips();
+      render();
+    })();
+  </script>
+</body>
+</html>
